@@ -13,7 +13,7 @@ def temporary_dico(file):
     fh = open(file, 'r')
     temp_dico = {}
     lines = fh.readlines()
-    symbol = "()-:,;?!'^+-#=/*\"<>@.&[]{}%µ§°_|~"
+    symbol = "()-:,;?!'^+-#=/*\"<>@.&[]{}%µ§_|~"
     for line in lines:
         for word in line.split():
             word = ''.join(x for x in word if x not in symbol)
@@ -21,8 +21,9 @@ def temporary_dico(file):
                 temp_dico[word] += 1
             else:
                 temp_dico[word] = 1
-    print(temp_dico)
     fh.close()
     #return temp_dico
 
+def annalyse():
+    ...
 
