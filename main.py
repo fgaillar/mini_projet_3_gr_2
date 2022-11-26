@@ -1,3 +1,4 @@
+import os
 
 global dyco_freq
 
