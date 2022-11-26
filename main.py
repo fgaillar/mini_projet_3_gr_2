@@ -25,7 +25,6 @@ def dico(file, dico):
             else:
                 dico[word] = 1
     fh.close()
-    print(dico)
     return dico
 
 
@@ -40,14 +39,14 @@ def get_frequency():
             dico(f'./archive_1/sorted/{theme}/{file}', dyco_freq)
     themes = os.listdir('./archive_2/sorted')
     for theme in themes:
-        for file in os.listdir(f'./archive_1/sorted/{theme}'):
-            dico(f'./archive_1/sorted/{theme}/{file}', dyco_freq)
+        for file in os.listdir(f'./archive_2/sorted/{theme}'):
+            dico(f'./archive_2/sorted/{theme}/{file}', dyco_freq)
     themes = os.listdir('./archive_3/sorted')
     for theme in themes:
-        for file in os.listdir(f'./archive_1/sorted/{theme}'):
-            dico(f'./archive_1/sorted/{theme}/{file}', dyco_freq)
+        for file in os.listdir(f'./archive_3/sorted/{theme}'):
+            dico(f'./archive_3/sorted/{theme}/{file}', dyco_freq)
     themes = os.listdir('./archive_4/sorted')
     for theme in themes:
-        for file in os.listdir(f'./archive_1/sorted/{theme}'):
-            dico(f'./archive_1/sorted/{theme}/{file}', dyco_freq)
+        for file in os.listdir(f'./archive_4/sorted/{theme}'):
+            dico(f'./archive_4/sorted/{theme}/{file}', dyco_freq)
     return dyco_freq
