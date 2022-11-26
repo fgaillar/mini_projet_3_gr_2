@@ -1,9 +1,9 @@
 import os
 
-global dyco_freq
-
 
 dyco_freq = {}
+
+
 def dico(file, dico):
     """
     Make temporary dictionary of word in a file
@@ -34,20 +34,17 @@ def analyse():
 
 
 def get_frequency():
-    themes = os.listdir('./archive_1/sorted')
-    for theme in themes:
+    for theme in os.listdir('./archive_1/sorted'):
         for file in os.listdir(f'./archive_1/sorted/{theme}'):
             dico(f'./archive_1/sorted/{theme}/{file}', dyco_freq)
-    themes = os.listdir('./archive_2/sorted')
-    for theme in themes:
+    for theme in os.listdir('./archive_2/sorted'):
         for file in os.listdir(f'./archive_2/sorted/{theme}'):
             dico(f'./archive_2/sorted/{theme}/{file}', dyco_freq)
-    themes = os.listdir('./archive_3/sorted')
-    for theme in themes:
+    for theme in os.listdir('./archive_3/sorted'):
         for file in os.listdir(f'./archive_3/sorted/{theme}'):
             dico(f'./archive_3/sorted/{theme}/{file}', dyco_freq)
-    themes = os.listdir('./archive_4/sorted')
-    for theme in themes:
+    for theme in os.listdir('./archive_4/sorted'):
         for file in os.listdir(f'./archive_4/sorted/{theme}'):
             dico(f'./archive_4/sorted/{theme}/{file}', dyco_freq)
     return dyco_freq
+print(get_frequency())
