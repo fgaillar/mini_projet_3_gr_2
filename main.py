@@ -33,6 +33,9 @@ def analyse():
     ...
 
 
+def archive():
+    ...
+
 def get_frequency():
     for theme in os.listdir('./archive_1/sorted'):
         for file in os.listdir(f'./archive_1/sorted/{theme}'):
@@ -47,4 +50,19 @@ def get_frequency():
         for file in os.listdir(f'./archive_4/sorted/{theme}'):
             dico(f'./archive_4/sorted/{theme}/{file}', dyco_freq)
     return dyco_freq
-print(get_frequency())
+
+
+def smart_sort_files(path):
+    """Sort unsorted files from a path
+    parameter:
+    -------------
+    path: where the files will be sorted (path)
+    """
+
+
+def check_accuracy(path):
+    """Check the accuracy of sorted file form a path
+    parameter:
+    -------------
+    path: Where the have been sorted to be checked
+    """
