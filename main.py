@@ -1,6 +1,8 @@
 import os
 
 
+big_dico = {}
+
 def dico(file, dico):
     """
     Make temporary dictionary of word in a file
@@ -14,10 +16,12 @@ def dico(file, dico):
     """
     fh = open(file, 'r')
     lines = fh.readlines()
-    symbol = "()-:,;?!'^+-#=/*\"<>@.&[]{}%µ§_|~"
+    symbols = ('(',')','-','º','`','þ','«','»','ª','$','²',':',',',';','?','!','\'','^','+','-','#','=','/','*','\\','\"','<','>','@','.','&','[',']','{','}','%','µ','§','_','|','~')
     for line in lines:
         for word in line.split():
-            word = ''.join(x for x in word if x not in symbol or x != '')
+            for symbol in symbols:
+                word = word.replace(symbol,'')
+            word = word.lower()
             if word in dico:
                 dico[word] += 1
             else:
@@ -26,16 +30,14 @@ def dico(file, dico):
     return dico
 
 
-def analyse():
-    ...
-
-
 def dico_per_theme():
+    big_dico = {}
     for archive in os.listdir(f'./archive'):
-        for theme in os.listdir(f'./{archive}/sorted'):
-            for file in os.listdir(f'./{archive}/sorted/{theme}'):
-                dico(f'./{archive}/sorted/{theme}/{file}', )
-
+        for theme in os.listdir(f'./archive/{archive}/sorted'):
+            big_dico[theme] = {}
+            for file in os.listdir(f'./archive/{archive}/sorted/{theme}'):
+                dico(f'./archive/{archive}/sorted/{theme}/{file}', big_dico[theme])
+    return big_dico
 
 def smart_sort_files(path):
     """Sort unsorted files from a path
@@ -50,6 +52,27 @@ def smart_sort_files(path):
     os.rename('./archive_1', './archive/archive_1')
     os.rename('./archive_2', './archive/archive_2')
     os.rename('./archive_3', './archive/archive_3')
+    os.rename('./archive_4', './archive/archive_4')
+
+
+def pr(word, theme):
+    """get the frequency of a word appeared in a file in a theme
+    parameter:
+    ------------
+    word:  (int)
+    theme:  (int)
+
+    return:
+    ------------
+    frequency: number between 0 and 1
+    """
+    number = len(big_dico[theme])
+    frequency = word/number
+    return frequency
+
+def get_freq(dict):
+    for x in big_dico[theme]:
+
 
 
 def check_accuracy(path):
