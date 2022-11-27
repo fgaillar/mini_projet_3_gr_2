@@ -1,9 +1,6 @@
 import os
 
 
-dyco_freq = {}
-
-
 def dico(file, dico):
     """
     Make temporary dictionary of word in a file
@@ -33,23 +30,11 @@ def analyse():
     ...
 
 
-def archive():
-    ...
-
-def get_frequency():
-    for theme in os.listdir('./archive_1/sorted'):
-        for file in os.listdir(f'./archive_1/sorted/{theme}'):
-            dico(f'./archive_1/sorted/{theme}/{file}', dyco_freq)
-    for theme in os.listdir('./archive_2/sorted'):
-        for file in os.listdir(f'./archive_2/sorted/{theme}'):
-            dico(f'./archive_2/sorted/{theme}/{file}', dyco_freq)
-    for theme in os.listdir('./archive_3/sorted'):
-        for file in os.listdir(f'./archive_3/sorted/{theme}'):
-            dico(f'./archive_3/sorted/{theme}/{file}', dyco_freq)
-    for theme in os.listdir('./archive_4/sorted'):
-        for file in os.listdir(f'./archive_4/sorted/{theme}'):
-            dico(f'./archive_4/sorted/{theme}/{file}', dyco_freq)
-    return dyco_freq
+def dico_per_theme():
+    for archive in os.listdir(f'./archive'):
+        for theme in os.listdir(f'./{archive}/sorted'):
+            for file in os.listdir(f'./{archive}/sorted/{theme}'):
+                dico(f'./{archive}/sorted/{theme}/{file}', )
 
 
 def smart_sort_files(path):
@@ -58,6 +43,13 @@ def smart_sort_files(path):
     -------------
     path: where the files will be sorted (path)
     """
+    try:
+        os.makedirs('./archive')
+    except FileExistsError:
+        pass
+    os.rename('./archive_1', './archive/archive_1')
+    os.rename('./archive_2', './archive/archive_2')
+    os.rename('./archive_3', './archive/archive_3')
 
 
 def check_accuracy(path):
