@@ -16,34 +16,39 @@ def dico(file, dico):
     """
     fh = open(file, 'r')
     lines = fh.readlines()
-    symbols = ('(',')','-','º','`','þ','«','»','ª','$','²',':',',',';','?','!','\'','^','+','-','#','=','/','*','\\','\"','<','>','@','.','&','[',']','{','}','%','µ','§','_','|','~')
+    symbols = ('(',')','1','2','3','4','5','6','7','8','9','0','-','º','`','þ','«','»','ª','$','²',':',',',';','?','!','\'','^','+','-','#','=','/','*','\\','\"','<','>','@','.','&','[',']','{','}','%','µ','§','_','|','~')
     for line in lines:
         for word in line.split():
             for symbol in symbols:
                 word = word.replace(symbol,'')
             word = word.lower()
-            if word in dico:
-                dico[word] += 1
-            else:
+            if not word in dico:
                 dico[word] = 1
     fh.close()
     return dico
 
 
-def dico_per_theme():
+def dico_with_theme():
+    """
+    Make a dicionary for
+    return:
+    """
     big_dico = {}
     for archive in os.listdir(f'./archive'):
         for theme in os.listdir(f'./archive/{archive}/sorted'):
             big_dico[theme] = {}
             for file in os.listdir(f'./archive/{archive}/sorted/{theme}'):
-                dico(f'./archive/{archive}/sorted/{theme}/{file}', big_dico[theme])
+                big_dico[theme][file] = {}
+                dico(f'./archive/{archive}/sorted/{theme}/{file}', big_dico[theme][file])
     return big_dico
 
 def smart_sort_files(path):
-    """Sort unsorted files from a path
-    parameter:
-    -------------
-    path: where the files will be sorted (path)
+    """
+    Sorts the unsorted files in the directory path in the correct repository of the 'sorted' repository.
+
+    Parameters
+    ----------
+    path: the path of the directory with the unsorted files (int)
     """
     try:
         os.makedirs('./archive')
@@ -71,8 +76,9 @@ def pr(word, theme):
     return frequency
 
 def get_freq(dict):
-    for x in big_dico[theme]:
-
+    for archive in os.listdir(f'./archive'):
+        for theme in os.listdir(f'./archive/{archive}/sorted'):
+            for file in os.listdir(f'./archive/{archive}/sorted/{theme}'):
 
 
 def check_accuracy(path):
@@ -81,3 +87,5 @@ def check_accuracy(path):
     -------------
     path: Where the have been sorted to be checked
     """
+    ...
+pprint(dico_with_theme())
