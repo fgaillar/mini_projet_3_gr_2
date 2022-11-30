@@ -118,4 +118,32 @@ def check_accuracy(path):
     -------------
     path: Where the have been sorted to be checked
     """
-    
+    print('checking accuracy of smart sorted texts ...')
+    labels_file = open(path + '/labels.txt', 'r')
+    lines = labels_file.readlines()
+    nb_lines = len(lines)
+    nb_accurates = 0
+    list_of_files_by_theme = {}
+    for line in lines:
+        file_name, theme = line.split()
+        if theme not in list_of_files_by_theme:
+            list_of_files_by_theme[theme] = os.listdir(path + f'/sorted/{theme}')
+        if file_name in list_of_files_by_theme[theme]:
+            nb_accurates += 1
+    labels_file.close()
+
+    print(f'accuracy is {round(nb_accurates / nb_lines * 100, 3)} %')
+
+
+path = './archive/archive_1'
+smart_sort_files(path)
+check_accuracy(path)
+path = './archive/archive_2'
+smart_sort_files(path)
+check_accuracy(path)
+path = './archive/archive_3'
+smart_sort_files(path)
+check_accuracy(path)
+path = './archive/archive_4'
+smart_sort_files(path)
+check_accuracy(path)
