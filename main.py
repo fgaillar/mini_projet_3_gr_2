@@ -3,6 +3,8 @@ import os
 
 big_dico = {}
 words_dico = {}
+
+
 def dico(file, dico):
     """
     Make temporary dictionary of word in a file
@@ -46,6 +48,7 @@ def dico_with_theme():
                 dico(f'./archive/{archive}/sorted/{theme}/{file}', big_dico[theme][file])
     return big_dico
 
+
 def smart_sort_files(path):
     """
     Sorts the unsorted files in the directory path in the correct repository of the 'sorted' repository.
@@ -78,6 +81,7 @@ def pr(word, theme):
     number = len(big_dico[theme])
     frequency = word / number
     return frequency
+
 
 def get_chances(file, words_dico):
     """
@@ -114,7 +118,7 @@ def get_chances(file, words_dico):
             chance += math.log(words_dico[word])
     for word in words_dico:
         if not word in list_words:
-            chance += math.log(100-words_dico[word])
+            chance += math.log(words_dico[word])
     fh.close()
     return chance
 
@@ -157,13 +161,14 @@ def get_words_dico(path):
                 words_dico[word] = 1
         fh.close()
     for word in words_dico:
-        words_dico[word] = (words_dico[word]/len(os.listdir(path)))
+        words_dico[word] = (words_dico[word]/len(1-os.listdir(path)))
     return words_dico
+
+
 for archive in os.listdir(f'./archive'):
     for theme in os.listdir(f'./archive/{archive}/sorted'):
         print(theme)
         pprint(get_chances(f'./archive/archive_1/unsorted/38888', get_words_dico(f'./archive/{archive}/sorted/{theme}')))
-
 
 
 def check_accuracy(path):
